@@ -17,12 +17,8 @@ end
 
  def update
     @genre = Genre.find(params[:id])
-    if @genre.update(genre_params)
-      flash[:notice] = "You have updated user successfully."
-      redirect_to genre_path(@genre)
-    else
-      render :edit
-    end
+    @genre.update(genre_params)
+    redirect_to admin_genres_path
  end
 
 
