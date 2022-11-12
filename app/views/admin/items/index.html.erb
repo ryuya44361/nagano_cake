@@ -1,7 +1,9 @@
 <main>
   <div class ="container">
     <div class = "row">
-        <h5 class="col-auto mt-4">商品一覧</h5>
+        <h5 class="col-8 mt-4">商品一覧</h5>
+      <div class = "col-2 mt-4">
+          <%= link_to "+", new_admin_item_path, class: "btn btn-sm btn-success"%>
       </div>
     </div>
 
@@ -23,10 +25,16 @@
 
             <tr>
               <td><%= item.id %></td>
-              <td><%= item.name %></td>
+              <td><%= link_to item.name, admin_item_path(item.id)%></td>
               <td><%= item.price %></td>
               <td><%= item.genre.name %></td>
-              <td><%= item.is_active %></td>
+              <td>
+                <% if item.is_active? %>
+                  <span>販売中</span>
+                <% else %>
+                  <span>販売停止中</span>
+                <% end %>
+              </td>
             </tr>
 
           <%end%>
