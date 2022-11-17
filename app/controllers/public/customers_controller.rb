@@ -19,6 +19,10 @@ class Public::CustomersController < ApplicationController
   end
   
   def change
+    @customer = current_customer
+    @customer.update(is_deleted: "true")
+    sign_out @customer
+    redirect_to root_path
   end
   
   private

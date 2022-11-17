@@ -4,7 +4,7 @@
       <h5>会員情報編集</h5>
     </div>
 
-<%= form_with model: @customer,url: customers_path,method: :patch do |f| %>
+  <%= form_with model: @customer,url: customers_path,method: :patch do |f| %>
 
   <div class = "row mt-2">
         <p class = "col-3">氏名</p>
@@ -34,10 +34,10 @@
     </div>
 
     <div class = "row">
-      <%= f.submit '編集内容を保存', class:"btn btn-success" %>
-      <%= link_to "退会する",secession_customer_path, class:"btn btn-success"%>
+      <div class = "col-3"></div>
+      <%= f.submit '編集内容を保存', class:"btn btn-success col-3 mr-5 my-3" %>
+      <%= link_to "退会する",customer_secession_path, class:"btn btn-danger col-auto my-3"%>
     </div>
-<%end%>
-
+  <%end%>
   </div>
 </main>
