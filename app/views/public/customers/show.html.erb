@@ -11,11 +11,11 @@
     </div>
 
     <div class = "row ml-3 ">
-      <table class="table table-bordered table-inverse col-auto">
+      <table class="table table-bordered table-inverse col-md-6">
         <tbody>
           <tr>
-            <td class="table-active">氏名</td>
-            <td><%= @customer.last_name %>　<%=@customer.first_name %></td>
+            <td class="table-active col-md-4">氏名</td>
+            <td class="col-md-8"><%= @customer.last_name %>　<%=@customer.first_name %></td>
           </tr>
           <tr>
             <td class="table-active">カナ</td>
@@ -40,7 +40,7 @@
         </tbody>
       </table>
     </div>
-    
+
 <!--ここに配送先一覧のリンクと、注文履歴へのリンクを記載-->
   </div>
 </main>

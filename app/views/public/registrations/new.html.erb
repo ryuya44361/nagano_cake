@@ -45,22 +45,22 @@
     </div>
   </div>
 
-　<div class = "row">
-　  <p>住所</p>
+  <div class = "row">
+    <p>住所</p>
     <div class="field">
       <%= f.text_field :address %>
     </div>
   </div>
 
   <div class = "row">
-　  <p>電話番号（ハイフンなし）</p>
+    <p>電話番号（ハイフンなし）</p>
     <div class="field">
       <%= f.text_field :telephone_number %>
     </div>
   </div>
 
-　<div class = "row">
-　  <p>パスワード（６文字以上）</p>
+ <div class = "row">
+   <p>パスワード（６文字以上）</p>
     <div class="field">
       <% if @minimum_password_length %>
       <em>(<%= @minimum_password_length %> characters minimum)</em>
