@@ -3,6 +3,7 @@ Rails.application.routes.draw do
    scope module: :public do
      resource :customers, only: [:show, :edit, :update]
      resources :addresses, only: [:index, :create, :edit, :update, :destroy]
+     resources :items, only: [:index, :show]
    end
 
   devise_for :customers,skip: [:passwords], controllers: {
