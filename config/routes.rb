@@ -5,6 +5,7 @@ Rails.application.routes.draw do
      resources :addresses, only: [:index, :create, :edit, :update, :destroy]
      resources :items, only: [:index, :show]
      resources :cart_items, only: [:index, :update, :destroy, :create]
+     resources :order, only: [:new, :create, :index, :show]
      delete "cart_items/destroy_all" => "caer_items#destroy_all"
    end
 
@@ -23,7 +24,9 @@ Rails.application.routes.draw do
 
    get "customer/secession" => "customers#secession"
    patch "customer/change" => "customers#change"
-
+   
+   get "order/complete" => "orders#complete"
+   post "order/confirm" => "orders#confirm"
 
  end
 

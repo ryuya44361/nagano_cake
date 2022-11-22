@@ -29,7 +29,7 @@
             <div class = "col-6">
               <h5><%= @item.name %></h5>
               <p><%= @item.introduction %></p><br />
-              <p>￥ <%= (@item.price+@item.price*0.1).floor.to_s(:delimited) %> (税込み）</p>
+              <p>￥ <%= (@item.price*1.1).floor.to_s(:delimited) %> (税込み）</p>
             </div>
           </div>
           <div class = "col text-right">

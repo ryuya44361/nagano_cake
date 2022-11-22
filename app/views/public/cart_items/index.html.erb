@@ -1,19 +1,22 @@
 <main>
   <div class ="container">
-    <div class = "row">
-        <h5 class="col-auto mt-4 ml-5">配送先編集</h5>
+    <div class = "row my-5">
+        <h5 class="col-5  ml-5">ショッピングカート</h5>
+        <div class = "col-6 text-right">
+          <%= link_to "カートを空にする", cart_items_destroy_all_path, method: :delete, class: "btn btn-sm btn-danger", "data-confirm" => "本当に削除しますか？" %>
+        </div>
     </div>
-    
+
     <div class ="row mt-5">
-    <div class="col-7">
+    <div class="col">
         <table class="table table-bordered border-dark">
           <thead>
             <tr>
-              <th class = "col-1 table-secondary">商品名</th>
-              <th class = "col-3 table-secondary">単価（税込）</th>
+              <th class = "col-4 table-secondary">商品名</th>
+              <th class = "col-2 table-secondary">単価（税込）</th>
               <th class = "col-2 table-secondary">数量</th>
-              <th class = "col-3 table-secondary">小計</th>
-              <th class = "col-3 table-secondary"></th>
+              <th class = "col-2 table-secondary">小計</th>
+              <th class = "col-2 table-secondary"></th>
             </tr>
           </thead>
 
@@ -22,18 +25,47 @@
 
             <tr>
               <td><%= image_tag cart_item.item.get_item_image(50,50) %><%= cart_item.item.name %></td>
-              <td><%= (cart_item.item.price+cart_itemitem.price*0.1).floor.to_s(:delimited) %></td>
-              <td><%= address.name %></td>
+              <td><%= cart_item.item.with_tax_price.to_s(:delimited) %></td>
+
               <td>
-                <%= link_to "編集する", edit_address_path(address.id), class: "btn btn-sm btn-success m-1"%>
-                <%= link_to "削除する", address_path(address.id), method: :delete, class: "btn btn-sm btn-danger m-1", "data-confirm" => "本当に削除しますか？" %>
+                <%= form_with model: @cart_items,url: cart_item_path(cart_item.id),method: :patch do |f| %>
+                  <%= f.select :amount, *[1..10] %>
+                  <%= f.submit '変更', class:"btn btn-success" %>
+                <%end%>
               </td>
-              <td></td>
+              <td>
+                <%= cart_item.subtotal.to_s(:delimited) %>
+              </td>
+              <td>
+                <div clas = " col-2 text-conter" >
+                  <%= link_to "削除する", cart_item_path(cart_item.id), method: :delete, class: "btn btn-sm btn-danger m-1", "data-confirm" => "本当に削除しますか？" %>
+                </div>
+              </td>
             </tr>
           <%end%>
           </tbody>
         </table>
         </div>
+      </div>
+      
+      <div class = "row mt-3">
+        <div class = "col-8 ml-3 mr-2">
+          <%= link_to "買い物を続ける", root_path,  class: "btn btn-sm btn-danger m-1"%>
+        </div>
+        <div class = "col-3 text-right ml-5">
+          <table class="table table-bordered border-dark">
+            <tbody>
+              <tr>
+                <td class = "col-2 table-secondary">合計</td>
+                <td class = "col-3"><%= @total.round.to_s(:delimited)%></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
+      <div class = "row text-center">
+        <!--ここにオーダーへのリンクを作成-->
       </div>
     </div>
   </main>
