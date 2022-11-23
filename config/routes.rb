@@ -4,9 +4,10 @@ Rails.application.routes.draw do
      resource :customers, only: [:show, :edit, :update]
      resources :addresses, only: [:index, :create, :edit, :update, :destroy]
      resources :items, only: [:index, :show]
+     delete "cart_items/destroy_all" => "cart_items#destroy_all"
      resources :cart_items, only: [:index, :update, :destroy, :create]
-     resources :order, only: [:new, :create, :index, :show]
-     delete "cart_items/destroy_all" => "caer_items#destroy_all"
+     resources :orders, only: [:new, :create, :index, :show]
+
    end
 
   devise_for :customers,skip: [:passwords], controllers: {
@@ -24,9 +25,9 @@ Rails.application.routes.draw do
 
    get "customer/secession" => "customers#secession"
    patch "customer/change" => "customers#change"
-   
-   get "order/complete" => "orders#complete"
-   post "order/confirm" => "orders#confirm"
+
+   get "orders/complete" => "orders#complete"
+   post "orders/confirm" => "orders#confirm"
 
  end
 
