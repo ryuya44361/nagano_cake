@@ -1,12 +1,16 @@
 class Public::OrderController < ApplicationController
   
   def new
-    @order = Order.new
     @customer = current_customer
-    @address = @customer.addresses
+    @order = Order.new
+    @address = @customer.addresses.all
+    
   end
   
   def confirm
+    @customer = current_customer
+    @order = Order.new(order_params)
+    @cart_item = @customer.cart_items.all
   end
   
   def complete
@@ -14,7 +18,7 @@ class Public::OrderController < ApplicationController
   
   def create
     @order = Order.new(order_params)
-    @customer.customer_id = current_customer.id
+    @order.customer_id = current_customer.id
     @order.save
   end
   
@@ -27,7 +31,8 @@ class Public::OrderController < ApplicationController
   private
   
   def order_params
-      params.require(:order).permit(:customer_id, :postal_code, :address, :name, :postage, :billing, :billing_method, :notes_status)
+      params.require(:order).permit(:customer_id, :postal_code, :address, :name, :postage, :billing, :billing_method)
   end
+  
   
 end

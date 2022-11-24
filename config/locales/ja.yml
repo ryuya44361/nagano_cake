@@ -1,7 +1,7 @@
  ja:
     enums:
       order:
-        payment_method:
+        billing_method:
           credit_card: "クレジットカード"
           transfer: "銀行振込"
         notes_status:
@@ -10,3 +10,9 @@
           create: "製作中"
           send: "発送準備中"
           close: "発送済み"
+      order_item:
+        create_status:
+          bad: "着手不可"
+          wait: "製作待ち"
+          create: "製作中"
+          complete: "製作完了"
