@@ -1,0 +1,90 @@
+<main>
+  <div class ="container">
+    <div class = "row justify-content-md-center my-3">
+        <h5 class = "col-10">注文情報確認</h5>
+    </div>
+  
+    <div class ="row">
+    <div class="col-8">
+        <table class="table table-bordered border-dark">
+          <thead>
+            <tr>
+              <th class = "col-2 table-secondary">商品名</th>
+              <th class = "col-1 table-secondary">単価（税込）</th>
+              <th class = "col-1 table-secondary">数量</th>
+              <th class = "col-1 table-secondary">小計</th>
+            </tr>
+          </thead>
+
+          <tbody>
+          <% @cart_items.each do |cart_item| %>
+
+            <tr>
+              <td><%= image_tag cart_item.item.get_item_image(50,50) %>　<%= cart_item.item.name %></td>
+              <td><%= cart_item.item.with_tax_price.to_s(:delimited) %></td>
+
+              <td><%= cart_item.amount %></td>
+              <td>
+                <%= cart_item.subtotal.to_s(:delimited) %>
+              </td>
+            </tr>
+          <%end%>
+          </tbody>
+        </table>
+        </div>
+
+        <div class = "col-2 ml-4">
+          <table class="table table-bordered border-dark">
+            <tbody>
+              <tr>
+                <td class = "table-secondary">送料</td>
+                <td><%= @order.postage %></td>
+              </tr>
+              <tr>
+                <td class = "table-secondary">商品合計</td>
+                <td>
+                  <%= @total.to_s(:delimited) %>
+                </td>
+              </tr>
+              <tr>
+                <td class = "table-secondary">請求金額</td>
+                <td><%= @total.to_s(:delimited) %></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class = "row mt-3">
+        <div class = "col-1">
+          <h6>支払方法</h6>
+        </div>
+        <div class = "col-2">
+          <p><%= Order.billing_methods_i18n[@order.billing_method] %> </p>
+        </div>
+      </div>
+      
+      <div class = "row mt-3">
+        <div class = "col-1">
+          <h6>お届け先</h6>
+        </div>
+        <div class = "col-6">
+          <p>
+            〒 <%= @order.postal_code %>　<%= @order.address %> <br>
+            <%= @order.name %>
+          </p>
+        </div>
+      </div>
+      <%= form_with model: @order,url: orders_path  do |f| %>
+        <div class = "row mt-3">
+          <div class = "col text-container">
+            <%= f.hidden_field :billing, :value => @total %>
+            
+            <%= f.submit '注文を確定する', class:"btn btn-success col-3" %>
+          </div>
+        </div>
+      <%end%>
+
+
+  </div>
+</main>

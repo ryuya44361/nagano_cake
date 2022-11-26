@@ -4,9 +4,21 @@ Rails.application.routes.draw do
      resource :customers, only: [:show, :edit, :update]
      resources :addresses, only: [:index, :create, :edit, :update, :destroy]
      resources :items, only: [:index, :show]
-     delete "cart_items/destroy_all" => "cart_items#destroy_all"
-     resources :cart_items, only: [:index, :update, :destroy, :create]
      
+     resources :cart_items, only: [:index, :update, :destroy, :create] do
+         collection do
+             delete :destroy_all
+         end
+     end
+
+     resources :orders, only: [:new, :create, :index, :show] do
+        collection do
+          post :confirm
+          get :complete
+        end
+     end
+     
+
 
    end
 
@@ -26,9 +38,7 @@ Rails.application.routes.draw do
    get "customer/secession" => "customers#secession"
    patch "customer/change" => "customers#change"
 
-   resources :orders, only: [:new, :create, :index, :show]
-   get "orders/complete" => "orders#complete"
-   post "orders/confirm" => "orders#confirm"
+
 
  end
 

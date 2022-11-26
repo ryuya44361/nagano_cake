@@ -1,0 +1,77 @@
+<main>
+ <div class ="container">
+    <div class = "row justify-content-md-center my-3">
+        <h5 class = "col-10">注文情報入力</h5>
+    </div>
+    
+    <%= form_with model: @order,url: confirm_orders_path  do |f| %>
+    <h6 class = "mt-3">支払方法</h6>
+    <div class = "row">  
+      <div class = "col-10 ml-4">
+        <%= f.radio_button :billing_method, Order.billing_methods.key(0) %>
+        <%= f.label :billing_method_credit_card, Order.billing_methods_i18n[:credit_card] %>
+      </div>
+      <div class = "col-10 ml-4">
+        <%= f.radio_button :billing_method, Order.billing_methods.key(1) %>
+        <%= f.label :billing_method_transfer, Order.billing_methods_i18n[:transfer]%>
+      </div>
+    </div>
+    
+    <h6>お届け先</h6>
+    <div class ="container ml-4">
+      <div class = "row mt-2">
+        <%= f.radio_button :address_select, 0 %>
+        <%= f.label :address_select_0, "ご自身の住所" %>
+      </div>
+      <div class = "row">
+        <div class = "col">
+          <label>
+            〒 <%= @customer.postal_code %>　<%= @customer.address%> <br>
+            <%= @customer.last_name + @customer.first_name %>
+          </label>
+        </div>
+      </div>
+      
+    
+      <div class = "row">
+        <%= f.radio_button :address_select, 1 %>
+        <%= f.label :address_select_1, "登録済住所から選択" %>
+      </div>
+      <div class = "row">
+        <div class = "col">
+          <%= f.select :address_id, options_from_collection_for_select(@address, :id, :address_display) %>
+        </div>
+      </div>
+    
+      <div class = "row mt-2">
+         <%= f.radio_button :address_select, 2 %>
+        <%= f.label :address_select_2, "新しいお届け先" %>
+      </div>
+        <div class = "row">
+          <p class = "col-3">郵便番号(ハイフンなし）</p>
+          <%= f.text_field :postal_code ,placeholder: "0000000",class: "form-control col-3 mr-5"%>
+        </div>
+
+        <div class = "row mt-2">
+          <p class = "col-3">住所</p>
+          <%= f.text_field :address ,placeholder: "東京都渋谷区代々木神園町0-0",class: "form-control col-6 mr-5"%>
+        </div>
+
+        <div class = "row mt-2">
+          <p class = "col-3">宛名</p>
+          <%= f.text_field :name ,placeholder: "令和道子",class: "form-control col-3"%>
+        </div>
+        
+        <div class = "row mt-2">
+          <div class="col-6 text-right">
+            <%= f.hidden_field :postage, :value => 800 %>
+            <%= f.submit '確認画面へ送る', class:"btn btn-success col-3" %>
+          </div>
+        </div>
+      </div>
+
+    <%end%>
+    
+    
+  </div>
+</main>
