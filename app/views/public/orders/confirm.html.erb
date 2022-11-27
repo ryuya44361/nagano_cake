@@ -1,9 +1,9 @@
 <main>
   <div class ="container">
-    <div class = "row justify-content-md-center my-3">
+    <div class = "row justify-content-center my-3">
         <h5 class = "col-10">注文情報確認</h5>
     </div>
-  
+
     <div class ="row">
     <div class="col-8">
         <table class="table table-bordered border-dark">
@@ -63,7 +63,7 @@
           <p><%= Order.billing_methods_i18n[@order.billing_method] %> </p>
         </div>
       </div>
-      
+
       <div class = "row mt-3">
         <div class = "col-1">
           <h6>お届け先</h6>
@@ -75,15 +75,23 @@
           </p>
         </div>
       </div>
-      <%= form_with model: @order,url: orders_path  do |f| %>
-        <div class = "row mt-3">
-          <div class = "col text-container">
+
+      <div class = "row mt-3">
+        <div class = "col text-center">
+          <%= form_with model: @order,url: orders_path  do |f| %>
+
             <%= f.hidden_field :billing, :value => @total %>
-            
-            <%= f.submit '注文を確定する', class:"btn btn-success col-3" %>
-          </div>
+            <%= f.hidden_field :postal_code %>
+            <%= f.hidden_field :address %>
+            <%= f.hidden_field :name %>
+            <%= f.hidden_field :postage %>
+            <%= f.hidden_field :billing_method %>
+            <%= f.hidden_field :notes_status, :value => "waiting" %>
+          
+            <%= f.submit '注文を確定する', class:"btn btn-success " %>
+          <%end%>
         </div>
-      <%end%>
+      </div>
 
 
   </div>

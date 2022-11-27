@@ -33,7 +33,7 @@ class Public::OrdersController < ApplicationController
     
     @order = Order.new(order_params)
     @order.customer_id = current_customer.id
-    if @order.save
+    @order.save
       
       cart_items.each do |cart|
         order_item = OrderItem.new
@@ -41,15 +41,12 @@ class Public::OrdersController < ApplicationController
         order_item.order_id = @order.id
         order_item.purchase_amount = (cart.item.price * 1.1).floor
         order_item.amount = cart.amount
-        order_item.create_status = OrderItem.notes_statuses.key(0)
+        order_item.create_status = 0
         order_item.save
       end
-    else
+      
       cart_items.destroy_all
       redirect_to complete_orders_path
-    end
-      @order = Order.new(order_params)
-      render :new
   end
   
   def index
