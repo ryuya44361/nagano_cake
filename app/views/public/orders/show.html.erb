@@ -1,0 +1,91 @@
+<main>
+  <div class = "container">
+    <div class = "row my-4 ml-5">
+      <h5>注文履歴詳細</h5>
+    </div>
+    
+    <div class = "row">
+      <div class = "col-6">
+        <p>注文情報</p>
+        <table class="table table-bordered border-dark">
+          <tbody>
+            <tr>
+              <td class = "table-secondary">注文日</td>
+              <td><%= @order.created_at.strftime('%Y/%m/%d')%></td>
+            </tr>
+            <tr>
+              <td class = "table-secondary">配送先</td>
+              <td>
+                〒<%= @order.postal_code %><br />
+                <%= @order.address %><br />
+                <%= @order.name %>
+              </td>
+            </tr>
+            <tr>
+              <td class = "table-secondary">支払方法</td>
+              <td><%= Order.billing_methods_i18n[@order.billing_method] %></td>
+            </tr>
+            <tr>
+              <td class = "table-secondary">ステータス</td>
+              <td><%= Order.notes_statuses_i18n[@order.notes_status] %></td>
+            </tr>
+          </tbody>
+        </table>
+        </div>
+        
+        <div class = "col-4 ml-1">
+        <p>請求情報</p>
+        <table class="table table-bordered border-dark">
+          <tbody>
+            <tr>
+              <td class = "table-secondary">商品合計</td>
+              <td><%= @order.billing.to_s(:delimited) %></td>
+            </tr>
+            <tr>
+              <td class = "table-secondary">配送料</td>
+              <td><%= @order.postage.to_s(:delimited) %></td>
+            </tr>
+            <tr>
+              <td class = "table-secondary">ご請求額</td>
+              <td><%= (@order.billing + @order.postage).to_s(:delimited) %></td>
+            </tr>
+          </tbody>
+        </table>
+        </div>
+        
+    </div>
+    
+    <div class = "row">
+      <div class = "col-8" >
+        <p>注文内容</p>
+        <table class="table table-bordered border-dark">
+          <thead>
+            <tr>
+              <th class = "col-2 table-secondary">商品名</th>
+              <th class = "col-1 table-secondary">単価（税込）</th>
+              <th class = "col-1 table-secondary">個数</th>
+              <th class = "col-1 table-secondary">小計</th>
+            </tr>
+          </thead>
+
+          <tbody>
+          <% @order.order_items.each do |order_item| %>
+
+            <tr>
+              <td><%= order_item.item.name %></td>
+              <td><%= order_item.item.with_tax_price.to_s(:delimited) %></td>
+
+              <td><%= order_item.amount %></td>
+              <td>
+                <%= order_item.subtotal.to_s(:delimited) %>
+              </td>
+            </tr>
+          <%end%>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    
+    
+  </div>
+</main>

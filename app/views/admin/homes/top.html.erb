@@ -20,16 +20,16 @@
           <% @orders.each do |order| %>
 
             <tr>
-              <td><%= link_to order.created_at, admin_order_path(order.id), class: "btn btn-sm btn-success"%></td>
-              <td><%= order.customer.name %></td>
-              <!--<td><%= order.customer.name %></td> ここに注文数量を表す記載　　-->
+              <td><%= link_to order.created_at, admin_order_path(order.id)%></td>
+              <td><%= order.customer.last_name + order.customer.first_name %></td>
+              <td><%= @total %></td>
               <td><%= order.notes_status %></td>
             </tr>　
 
           <%end%>
           </tbody>
         </table>
-        <%= paginate @items %>
+        <%= paginate @orders %>
         </div>
       </div>
   </div>
