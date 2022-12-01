@@ -1,18 +1,18 @@
 <main>
-  <div class = "container px-5">
+  <div class = "container">
     <div class = "row m-3">
       <h5>注文履歴一覧</h5>
     </div>
     
     <div class ="row">
-    <div class="col-4 px-5 mt-5">
+    <div class="col-10 mt-2">
         <table class="table table-hover table-inverse">
           <thead>
             <tr>
-              <th>購入日時</th>
-              <th>購入者</th>
-              <th>注文数量</th>
-              <th>注文ステータス</th>
+              <th class = "table-secondary">購入日時</th>
+              <th class = "table-secondary">購入者</th>
+              <th class = "table-secondary">注文数量</th>
+              <th class = "table-secondary">注文ステータス</th>
             </tr>
           </thead>
 
@@ -20,10 +20,10 @@
           <% @orders.each do |order| %>
 
             <tr>
-              <td><%= link_to order.created_at, admin_order_path(order.id)%></td>
+              <td><%= link_to order.created_at.strftime('%Y/%m/%d %H:%M:%S'), admin_order_path(order.id)%></td>
               <td><%= order.customer.last_name + order.customer.first_name %></td>
-              <td><%= @total %></td>
-              <td><%= order.notes_status %></td>
+              <td><%= order.order_items.inject(0) { |sum, order_item| sum + order_item.amount } %></td>
+              <td><%= Order.notes_statuses_i18n[order.notes_status] %></td>
             </tr>　
 
           <%end%>
