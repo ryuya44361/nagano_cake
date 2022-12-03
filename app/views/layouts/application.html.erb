@@ -14,7 +14,11 @@
     <header>
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-          <a class="navbar-brand" href="/">LOGO</a>
+          <% if admin_signed_in? %>
+            <p class="navbar-brand my-0">LOGO</p>
+          <% else %>
+            <a class="navbar-brand" href="/">LOGO</a>
+          <%end%>
 
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                         aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,7 +42,7 @@
           </li>
 
           <li class="nav-item">
-            <%= link_to admin_orders_path, class: 'nav-link text-light' do %>
+            <%= link_to admin_root_path, class: 'nav-link text-light' do %>
               注文履歴一覧
             <%end%>
           </li>
