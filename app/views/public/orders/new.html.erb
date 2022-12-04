@@ -3,6 +3,13 @@
     <div class = "row justify-content-md-center my-3">
         <h5 class = "col-10">注文情報入力</h5>
     </div>
+    
+    <div class = "row ml-3">
+      <% if @order.errors.any? %>
+        <h6 class = "col-auto text-danger">支払い方法・お届け先を選択してください。</h6>
+      <% end %>
+    </div>
+    
 
     <%= form_with model: @order,url: confirm_orders_path  do |f| %>
     <h6 class = "mt-3">支払方法</h6>
@@ -21,7 +28,7 @@
     <h6>お届け先</h6>
     <div class ="container ml-4">
       <div class = "row mt-2">
-        <%= f.radio_button :address_select, 0 %>
+        <%= f.radio_button :address_select, 0, checked: true %>
         <%= f.label :address_select_0, "ご自身の住所" %>
       </div>
       <div class = "row">

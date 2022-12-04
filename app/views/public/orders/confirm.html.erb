@@ -48,7 +48,7 @@
               </tr>
               <tr>
                 <td class = "table-secondary">請求金額</td>
-                <td><%= @total.to_s(:delimited) %></td>
+                <td><%= (@total+@order.postage).to_s(:delimited) %></td>
               </tr>
             </tbody>
           </table>

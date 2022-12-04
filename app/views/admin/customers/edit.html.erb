@@ -6,6 +6,12 @@
       </h5>
     </div>
 
+    <div class = "row ml-3">
+      <% if @customer.errors.any? %>
+        <h6 class = "col-auto text-danger">全ての値を入力ください。</h6>
+      <% end %>
+    </div>
+
     <div class = "row mt-2">
         <p class = "col">会員ID</p>
         <p class = "col-9"><%= @customer.id %></p>

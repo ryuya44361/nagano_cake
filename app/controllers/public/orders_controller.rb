@@ -1,4 +1,5 @@
 class Public::OrdersController < ApplicationController
+  before_action :authenticate_customer!
   
   def new
     @customer = current_customer
@@ -33,7 +34,7 @@ class Public::OrdersController < ApplicationController
     
     @order = Order.new(order_params)
     @order.customer_id = current_customer.id
-    @order.save
+    if @order.save
       
       cart_items.each do |cart|
         order_item = OrderItem.new
@@ -47,6 +48,11 @@ class Public::OrdersController < ApplicationController
       
       cart_items.destroy_all
       redirect_to complete_orders_path
+    else
+      @customer = current_customer
+      @address = @customer.addresses.all
+      render :new
+    end
   end
   
   def index

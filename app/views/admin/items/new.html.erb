@@ -3,6 +3,12 @@
     <div class = "row mt-3">
       <h5>商品新規登録</h5>
     </div>
+    
+    <div class = "row ml-3">
+      <% if @item.errors.any? %>
+        <h6 class = "col-auto text-danger">すべての項目に値をいれてください。</h6>
+      <% end %>
+    </div>
 
       <%= form_with model: @item,url: admin_items_path  do |f| %>
 

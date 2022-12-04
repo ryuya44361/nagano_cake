@@ -3,7 +3,13 @@
     <div class = "row">
         <h5 class="col-auto mt-4 ml-5">配送先編集</h5>
     </div>
-
+    
+    <div class = "row ml-3">
+      <% if @address.errors.any? %>
+        <h6 class = "col-auto text-danger">全ての値を入力ください。</h6>
+      <% end %>
+    </div>
+    
     <%= form_with model: @address,url: address_path(@address.id),method: :patch do |f| %>
 
       <div class = "row mt-4">

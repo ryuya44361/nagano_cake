@@ -1,4 +1,5 @@
 class Public::CartItemsController < ApplicationController
+  before_action :authenticate_customer!
 
   def index
     @customer = current_customer
@@ -36,6 +37,7 @@ class Public::CartItemsController < ApplicationController
     else
       @cart_item.customer_id = current_customer.id
       @cart_item.save
+      
     end
 
     redirect_to cart_items_path

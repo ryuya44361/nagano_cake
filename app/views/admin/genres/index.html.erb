@@ -1,10 +1,15 @@
 <main>
   <div class ="container">
     <div class = "row">
-        <h5 class="col-auto mt-4">ジャンル一覧・追加</h5>
+        <h5 class="col-auto my-4">ジャンル一覧・追加</h5>
       </div>
     </div>
 
+    <div class = "row ml-3">
+      <% if @genre.errors.any? %>
+        <h6 class = "col-auto text-danger">ジャンル名をいれてください。</h6>
+      <% end %>
+    </div>
 
 
 
