@@ -26,7 +26,7 @@
 
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
-              
+
         <% if admin_signed_in? %>
 
           <li class="nav-item">
@@ -52,7 +52,7 @@
               ジャンル一覧
             <%end%>
           </li>
-          
+
           <li class="nav-item">
             <%= link_to destroy_admin_session_path, method: :delete, class: 'nav-link text-light' do %>
               ログアウト
@@ -60,7 +60,7 @@
           </li>
 
         <% elsif customer_signed_in? %>
-          
+
           <li class="nav-item">
             <%= link_to customers_path, class: 'nav-link text-light' do %>
               マイページ
@@ -84,9 +84,9 @@
               ログアウト
             <%end%>
           </li>
-        
+
         <%else%>
-            
+        
           <li class="nav-item">
             <%= link_to about_path, class: 'nav-link text-light' do %>
               About
@@ -110,19 +110,18 @@
               ログイン
             <%end%>
           </li>
-
         <% end %>
             </ul>
           </div>
         </div>
       </nav>
     </header>
-    
+
     <%= yield %>
-    
+
     <footer>
       <nav class="navbar navbar-expand navbar-dark bg-dark mt-5">
-        
+
       </nav>
     </footer>
   </body>
